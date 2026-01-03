@@ -1,0 +1,10 @@
+dict={
+    "fruit":"apple",
+    "seeds":"yes",
+    "color":"red",
+    "poisonous":"yes",
+    "number":2
+    }
+dict["doctor"]="no"
+dict["number"]=10
+print(dict)
