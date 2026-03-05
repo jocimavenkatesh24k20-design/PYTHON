@@ -1,0 +1,58 @@
+  # 242. Valid Anagram
+class Solution(object):
+    def isAnagram(self, s, t):
+        if len(s)!=len(t):
+            return False
+
+        freq=[0]*26
+        for i in range(len(s)):
+            freq [ord(s[i])-ord('a')]+=1
+            freq[ord(t[i])-ord('a')]-=1
+        for c in freq:
+            if c!=0:
+                return False
+        return True
+
+
+  # 125. Valid Palindrome
+class Solution(object):
+    def isPalindrome(self, s):
+        left=0
+        right=len(s)-1
+        while (left<right):
+            while(left<right and not s[left].isalnum()):
+                left+=1
+            while(left<right and not s[right].isalnum()):
+                right-=1
+            if(s[left].lower() != s[right].lower()):
+                return False
+            left+=1
+            right-=1
+        return True
+
+
+  # 14. Longest Common Prefix
+class Solution(object):
+    def numSpecial(self, mat):
+        m = len(mat)
+        n = len(mat[0])
+        
+        row_count = [0] * m
+        col_count = [0] * n
+        
+        # Count number of 1s in each row and column
+        for i in range(m):
+            for j in range(n):
+                if mat[i][j] == 1:
+                    row_count[i] += 1
+                    col_count[j] += 1
+        
+        special = 0
+        
+        # Check special positions
+        for i in range(m):
+            for j in range(n):
+                if mat[i][j] == 1 and row_count[i] == 1 and col_count[j] == 1:
+                    special += 1
+        
+        return special
