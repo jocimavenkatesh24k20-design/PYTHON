@@ -1,0 +1,62 @@
+    # 1.  TWO SUMS
+class Solution(object):
+    def twoSum(self, nums, target):
+        map={}
+        for i in range (len(nums)):
+            c=target-nums[i]
+            if c in map:
+                return [map[c],i]
+            map[nums[i]]=i
+
+    # 167. Two Sum II - Input Array Is SorteD
+class Solution(object):
+    def twoSum(self, numbers, target):
+        l = 0
+        r = len(numbers)-1
+        while(l<r):
+            c=numbers[l]+numbers[r]
+            if(c==target):
+                return [l+1,r+1]
+            elif(c<target):
+                l+=1
+            else:
+                r-=1
+
+    # 121.  Best Time to Buy and Sell Stock
+class Solution(object):
+    def maxProfit(self, prices):
+        buy = prices[0]
+        mp=0
+        for i in range(1,len(prices)):
+            if(buy>prices[i]):
+                buy=prices[i]
+
+            cp=prices[i]-buy
+            mp=max(mp,cp)
+
+        return mp
+
+    # 217. Contains Duplicate
+class Solution(object):
+    def containsDuplicate(self, nums):
+        s=set()
+        for i in nums:
+            if i in s:
+                return True
+            s.add(i)
+        return False
+
+    #  169. Majority Element
+class Solution(object):
+    def majorityElement(self, nums):
+        majority = nums[0]
+        vote = 1
+        for i in range (1,len(nums)):
+            if(vote==0):
+                majority=nums[i]
+                vote=1
+            elif(majority==nums[i]):
+                vote+=1
+            else:
+                vote-=1
+        return majority
