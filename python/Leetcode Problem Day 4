@@ -1,0 +1,70 @@
+ # 3239. Sliding Window Maximum
+class Solution(object):
+    def maxSlidingWindow(self, nums, k):
+        n=len(nums)
+        dq=deque()
+        ans=[]
+        for i in range(n):
+            while(dq and dq[0]<=i-k):
+                dq.popleft()
+            while(dq and nums[i]>nums[dq[-1]]):
+                dq.pop()
+            dq.append(i)
+            if(i>=k-1):
+                ans.append(nums[dq[0]])
+        return ans    
+
+ # 496. Next Greater Element I
+class Solution(object):
+    def nextGreaterElement(self, nums1, nums2):
+       stack = []
+       d = {}
+       d[nums2[-1]] = -1
+       stack.append(nums2[-1])
+       for i in range(len(nums2)-2,-1,-1):
+           if(nums2[i]<stack[-1]):
+               d[nums2[i]] = stack[-1]
+               stack.append(nums2[i])
+               continue
+           while(stack and nums2[i]>stack[-1]):
+                stack.pop()
+           if not stack:
+                d[nums2[i]] =-1
+                stack.append(nums2[i])
+           else:
+                d[nums2[i]] = stack[-1]
+                stack.append(nums2[i])
+       for i in range(len(nums1)):
+            nums1[i] = d[nums1[i]]
+       return nums1
+
+
+# 739. Daily Temperatures
+class Solution(object):
+    def dailyTemperatures(self, temperature):
+        n=len(temperature)
+        ans = [0]*n
+        stack=[]
+        for i in range(n-1,-1,-1):
+            while (stack and temperature [i]>=temperature[stack[-1]]):
+                stack.pop()
+            if stack:
+                ans[i]=stack[-1]-i
+            stack.append(i)
+        return ans
+
+# 20. Valid Parentheses
+class Solution(object):
+    def isValid(self, s):
+       stack = []
+       for c in s:
+           if(c == '('):
+               stack.append(')')
+           elif(c == '['):
+               stack.append(']')
+           elif(c == '{'):
+               stack.append('}')
+           else:
+               if not stack or stack.pop()!=c:
+                  return False
+       return not stack
