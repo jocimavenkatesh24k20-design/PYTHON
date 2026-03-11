@@ -1,0 +1,91 @@
+  104.Maximum Depth of Binary Tree
+class Solution(object):
+    def maxDepth(self, root):
+        if not root:
+            return 0
+        l=self.maxDepth(root.left)
+        r=self.maxDepth(root.right)
+        return 1+ max(l,r)
+
+  # 100.Same Tree
+class Solution(object):
+    def isSameTree(self, p, q):
+        if not p and not q:
+            return True
+        if not p or not q:
+            return False
+        if(p.val!=q.val):
+            return False
+        return self.isSameTree(p.left,q.left) and self.isSameTree(p.right,q.right)
+
+  # 101.Symmetric Tree
+class Solution(object):
+    def isSymmetric(self, root):
+        return self.same(root.left,root.right)
+    def same(self,p,q):
+        if not p and not q:
+            return True
+        if not p or not q:
+            return False
+        if(p.val!=q.val):
+            return False
+        return self.same(p.left,q.right) and self.same(p.right,q.left)
+
+  # 112. Path Sum
+class Solution(object):
+    def hasPathSum(self, root, targetSum):
+        if not root:
+            return False
+        if not root.left and not root.right:
+            return targetSum==root.val
+        return (self.hasPathSum(root.left,targetSum-root.val) or
+               self.hasPathSum(root.right,targetSum-root.val))
+
+  # 700. Search in Binary Tree
+class Solution(object):
+    def searchBST(self, root, val):
+        while root:
+            if(root.val==val):
+                return root
+            if(root.val<val):
+                root=root.right
+            else:
+                root=root.left
+        return None
+
+  # 701.Insert into a Binary search tree
+class Solution(object):
+    def insertIntoBST(self, root, val):
+        if not root:
+            return TreeNode(val)
+        root1=root
+        while(True):
+            if root1.val<=val:
+                if root1.right:
+                    root1=root1.right
+                else:
+                    root1.right=TreeNode(val)
+                    break
+
+            else:
+                if root1.left:
+                    root1=root1.left
+                else:
+                    root1.left=TreeNode(val)
+                    break
+        return rootes
+
+    while queue:
+        node = queue.popleft()
+        for side in ['left', 'right']:
+            val = input(f"Enter {side} child of {node.data} (or 'None'): ")
+            if val.lower() != 'none':
+                child = Node(int(val))
+                setattr(node, side, child)  # node.left or node.right
+                queue.append(child)
+
+    return root
+
+# Main
+root = build_tree()
+print("Number of leaf nodes:", count_leaf_nodes(root))
